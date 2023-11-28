@@ -18,7 +18,7 @@ from flask_compress import Compress
 
 app = Flask(__name__)
 
-@app.route('/about')
+@app.route ('/about')
 def about():
     return render_template('about.html')
 
@@ -263,7 +263,7 @@ def check_website_statuses():
         if baseline_info:
                 changes = compare_with_baseline_with_screenshot(url, current_info, baseline_info)
                 if changes:
-                    website_status = "Changed"
+                    website_status = "Defaced"
         
         monitored_websites[website_name]['status'] = website_status
         monitored_websites[website_name]['last_checked'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -272,8 +272,14 @@ def check_website_statuses():
 
 # Modify the initialization of monitored_websites to include baseline information
 monitored_websites = {
-    'Apache': {'url': 'http://10.0.2.15', 'last_checked': 'N/A', 'status': 'Up'},
-    'Minister Of Education': {'url': 'https://moe.gov.et', 'last_checked': 'N/A', 'status': 'Up'},
+    'Apache': {'url': 'http://10.0.2.15', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Server'},
+    'Business': {'url': 'https://business.gov.et', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Government'},
+    'E-services': {'url': 'https://www.eservices.gov.et', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Government'},
+    'Minister Of Finance': {'url': 'https://www.mofed.gov.et', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Government'},
+    'Ethiopia Custom Trade': {'url': 'https://customs.erca.gov.et/trade', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Government'},
+    'Amhara Bank': {'url': 'https://www.amharabank.com.et', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Finance'},
+    'Ethiopian Construction and Works Corporations': {'url': 'http://ecwc.gov.et/', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Government'},
+    'Ethiopian Statistical Service': {'url': 'https://www.statsethiopia.gov.et/', 'last_checked': 'N/A', 'status': 'Up', 'type': 'Government'},
 }
 
 for website_name, website_info in monitored_websites.items():

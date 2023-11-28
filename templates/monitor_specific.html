@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Monitor - {{ website_status }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='monitor_specific.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
-        <div class="monitor-page">
+        <div class="monitor-page card bg-dark shadow-2-strong">
             <h1>Website Information</h1>
             <table>
                 <tr>
@@ -29,7 +31,8 @@
                 </tr>
                 <tr>
                     <td>Website Status</td>
-                    <td class="monitor-status">{{ website_status }}</td>
+                    <!-- <td class="monitor-status">{{ website_status }}</td> -->
+                    <td class="monitor-status {% if website_status == 'Alive' %}badge badge-success{% elif website_status == 'Defaced' %}badge badge-warning{% else %}badge badge-danger{% endif %}">{{ website_status }}</td>
                 </tr>
                 <tr>
                     <td>Last Time Checked</td>
