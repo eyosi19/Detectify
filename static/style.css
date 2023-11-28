@@ -1,0 +1,112 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(#30c5d2, #30c5d2);
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    padding-top: 20px;
+}
+
+.logo {
+    color: #023047;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    font-weight: 600;
+}
+
+.nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.dashboard {
+    margin: 20px;
+    color: #333;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.website-list {
+    margin-top: 20px;
+    background: linear-gradient(#023047, #30c5d2);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #004080;
+    color: #fff;
+}
+
+tr {
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+tr:hover {
+    background-color: black;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.monitor-button, .delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.monitor-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.delete-button {
+    background-color: #cc0000;
+    color: #fff;
+}
+
+.monitor-button:hover, .delete-button:hover {
+    background-color: #0056b3;
+}
+.status-up {
+    color: rgb(0, 255, 0);
+}
+.status-down {
+    color: red;
+}
+.status-changed {
+    color: yellow;
+}

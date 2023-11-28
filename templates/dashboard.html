@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detectify - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <b>Detectify</b>
+        </div>
+        <nav>
+            <ul>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="http://127.0.0.1:9000/">Uptime</a></li>
+                <li><a href="http://127.0.0.1:8000/">Technology</a></li>
+                <li><a href="{{ url_for('doc') }}">Documentation</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="dashboard">
+        <h2>Monitored Websites</h2>
+        <div class="website-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>Timestamp</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for website_name, website_info in monitored_websites.items() %}
+                        <tr class="{% if website_info['status'] == 'Alive' %}status-up{% elif website_info['status'] == 'Changed' %}status-changed{% else %}status-down{% endif %}">
+                            <td>{{ website_name }}</td>
+                            <td>{{ website_info.get('last_checked', 'N/A') }}</td>
+                            <td>{{ website_info['status'] }}</td>
+                            <td class="action-buttons">
+                                <button class="monitor-button" onclick="location.href='/monitor/{{ website_name }}'">Monitor</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

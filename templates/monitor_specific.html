@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Monitor - {{ website_status }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='monitor_specific.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="monitor-page">
+            <h1>Website Information</h1>
+            <table>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Textual Content Length</td>
+                    <td>{{ website_info.textual_content|length }}</td>
+                </tr>
+                <tr>
+                    <td>DOM Tree Length</td>
+                    <td>{{ website_info.dom_tree|length }}</td>
+                </tr>
+                <tr>
+                    <td>Content Length</td>
+                    <td>{{ website_info.content_length }}</td>
+                </tr>
+                <tr>
+                    <td>Website Status</td>
+                    <td class="monitor-status">{{ website_status }}</td>
+                </tr>
+                <tr>
+                    <td>Last Time Checked</td>
+                    <td>{{ last_time_checked }}</td>
+                </tr>
+            </table>
+
+            {% if 'screenshot' in website_info %}
+                <div class="screenshot">
+                    <h2>Screenshot</h2>
+                    <img src="data:image/png;base64,{{ website_info.screenshot }}" alt="Screenshot">
+                </div>
+            {% endif %}
+
+            <h2>Changes Detection bar</h2>
+            <div class="monitor-changes">
+                <table>
+                    <tr>
+                        <th>Change Type</th>
+                        <th>Change Details</th>
+                    </tr>
+                    {% for change in changes %}
+                        <tr>
+                            <td class="{% if 'added' in change.type %}added{% elif 'removed' in change.type %}removed{% elif 'modified' in change.type %}modified{% endif %}">
+                                {{ change.type }}
+                            </td>
+                            <td>
+                                {% if 'details' in change %}
+                                    <span>{{ change.details|join(', ') }}</span>
+                                {% else %}
+                                    No details available.
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='monitor_specific.js') }}"></script>
+</body>
+</html>
